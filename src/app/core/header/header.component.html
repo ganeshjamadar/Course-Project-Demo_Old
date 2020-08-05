@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" style="cursor: pointer;"
+  routerLink = "" >Recipe Book</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link"
+        routerLink = "/recipes" 
+        routerLinkActive="active">Recipes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"
+        routerLink="/shopping-list"
+        routerLinkActive="active">Shopping List</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <ul class="navbar-nav mr-auto">
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+          <li class="nav-item"> 
+            <a class="nav-link"
+            routerLink="/signup"
+            routerLinkActive="active">Register</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link"
+            routerLink="/signin"
+            routerLinkActive="active">Sign In</a>
+          </li>
+        </ng-template>
+        <!-- <li class="nav-item" *ngIf="authService.isAuthenticated()"> 
+          <a class="nav-link"  style="cursor: pointer;">Email ID: {{authService.getUserName()}}</a>
+        </li> -->
+        <!-- <li class="nav-item" *ngIf="authService.isAuthenticated()"> 
+          <a class="nav-link"  style="cursor: pointer;" (click)="OnLogOut()">Log Out</a>
+        </li> -->
+        <li class="nav-item dropdown" appDropdown #r='appDropdown' *ngIf="authService.isAuthenticated()">
+          <a class="nav-link dropdown-toggle" style="cursor: pointer;" id="navbarDropdown" role="button" 
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Manage
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" [ngClass]="{'show': r.isShow}">
+            <!-- <a class="dropdown-item"   style="cursor: pointer;">Email ID: {{authService.getUserName()}}</a> -->
+            <a class="dropdown-item" style="cursor: pointer;" (click)="OnSaveData()">Save Data</a>
+            <a class="dropdown-item" style="cursor: pointer;" (click)="OnFetchData()">Fetch Data</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item"  style="cursor: pointer;" (click)="OnLogOut()">Log Out</a>
+            <!-- <a class="dropdown-item" style="cursor: pointer;">Something else here</a> -->
+          </div>
+        </li>
+      </ul>
+      <a class="nav-link"  style="cursor: pointer;" *ngIf="authService.isAuthenticated()">Email ID: {{authService.getUserName()}}</a>
+      <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+    </form>
+  </div>
+</nav>
+
+
+<!-- <nav class="nav navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="#" class="navbar-brand">Recipe Book</a>
+      </div>
+      <div class="navbar-default">
+        <ul class="nav navbar-nav">
+          <li><a href="#">Recipes</a></li>
+          <li><a href="#">Shopping List</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Save Data</a></li>
+              <li><a href="#">Fetch Data</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav> -->
